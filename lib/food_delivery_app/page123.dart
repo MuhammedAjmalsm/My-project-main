@@ -193,7 +193,7 @@ class _page3State extends State<page3> {
 
           InkWell(
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => relogin()),
               );
@@ -208,7 +208,7 @@ class _page3State extends State<page3> {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [Text("Next", style: TextStyle(color: Colors.white))],
+                children: [Text("Get started", style: TextStyle(color: Colors.white))],
               ),
             ),
           ),

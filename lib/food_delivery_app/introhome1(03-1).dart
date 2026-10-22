@@ -6,9 +6,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mynewapp/food_delivery_app/Notification.dart';
 import 'package:mynewapp/food_delivery_app/Orders(tapbar).dart';
 import 'package:mynewapp/food_delivery_app/dataprofile.dart';
-import 'package:mynewapp/food_delivery_app/ewallet.dart';
+import 'package:mynewapp/food_delivery_app/favourites.dart';
 import 'package:mynewapp/food_delivery_app/message(tapbar).dart';
 import 'package:mynewapp/food_delivery_app/mycart.dart';
+import 'package:mynewapp/food_delivery_app/subpages/burger.dart';
+import 'package:mynewapp/food_delivery_app/subpages/dosha.dart';
+import 'package:mynewapp/food_delivery_app/subpages/laddu.dart';
+import 'package:mynewapp/food_delivery_app/subpages/noodles.dart';
+import 'package:mynewapp/food_delivery_app/subpages/pizza.dart';
+import 'package:mynewapp/food_delivery_app/subpages/salad.dart';
+import 'package:mynewapp/food_delivery_app/subpages/usa.dart';
 
 class mainhome extends StatefulWidget {
   const mainhome({super.key});
@@ -18,6 +25,8 @@ class mainhome extends StatefulWidget {
 }
 
 class _mainhomeState extends State<mainhome> {
+  // നിങ്ങളുടെ ക്ലാസിനുള്ളിൽ (State ഉള്ളിൽ) ഒരു വേരിയബിൾ വെക്കുക:
+bool isFavorite = false;
   // ignore: unused_field
   int _currentIntex = 0;
 
@@ -27,10 +36,19 @@ class _mainhomeState extends State<mainhome> {
     ),
     const orderstapbar(),
     const message(),
-    const wallet(),
+    const mycart(),
     const dataprofile(),
-    
   ];
+
+  final List<Map<String, dynamic>> categories = [
+  {'name': 'All', 'icon': Icons.fastfood_outlined},
+  {'name': 'Hamburger', 'icon': Icons.lunch_dining},
+  {'name': 'Pizza', 'icon': Icons.local_pizza},
+  {'name': 'Noodles', 'icon': Icons.ramen_dining},
+  {'name': 'Meat', 'icon': Icons.kebab_dining},
+  {'name': 'Drinks', 'icon': Icons.local_bar},
+  {'name': 'Dessert', 'icon': Icons.cake},
+];
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +56,7 @@ class _mainhomeState extends State<mainhome> {
       Icon(Icons.home, size: 30),
       Icon(Icons.list_alt_outlined, size: 30),
       Icon(Icons.message, size: 30),
-      Icon(Icons.wallet, size: 30),
+      Icon(Icons.shopping_cart, size: 30),
       Icon(Icons.person, size: 30),
     ];
 
@@ -70,15 +88,23 @@ class _mainhomeState extends State<mainhome> {
                         "Times Square",
                         style: TextStyle(color: Colors.white, fontSize: 18.sp),
                       ),
-                      Icon(
-                        Icons.arrow_drop_down_outlined,
-                        color: const Color.fromARGB(255, 7, 242, 15),
-                      ),
                     ],
                   ),
                 ],
               ),
               actions: [
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => favorates()),
+                      );
+                    },
+                    icon: Icon(Icons.favorite_outline),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: IconButton(
@@ -109,7 +135,7 @@ class _mainhomeState extends State<mainhome> {
       // body:
       body: _currentIntex == 0
           ? ListView(
-            padding: EdgeInsets.all(18.w),
+              padding: EdgeInsets.all(18.w),
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,58 +155,63 @@ class _mainhomeState extends State<mainhome> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         "Special Offers",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15.sp,
-                        ),
+                        style: TextStyle(color: Colors.white, fontSize: 15.sp),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 6.5),
-                      child: Container(
-                        height: 150.h,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 43, 230, 49),
-                          borderRadius: BorderRadius.circular(16.r),
-                        ),
-                        child: Row(
-                          children: [
-                            Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 12),
-                                  child: Text(
-                                    "30%",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 45.sp,
-                                      color: CupertinoColors
-                                          .secondarySystemGroupedBackground,
+                      child:   InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: ((context) => burger())),
+                        );
+                      },
+                        child: Container(
+                          height: 150.h,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 43, 230, 49),
+                            borderRadius: BorderRadius.circular(16.r),
+                          ),
+                          child: Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 12),
+                                    child: Text(
+                                      "30%",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 45.sp,
+                                        color: CupertinoColors
+                                            .secondarySystemGroupedBackground,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Text(
-                                  "    DISCOUNT ONLY\n   VALID FOR TODAY!                     ",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.urbanist(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w900,
+                                  Text(
+                                    "    DISCOUNT ONLY\n   VALID FOR TODAY!                     ",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.urbanist(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w900,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 180.h,
-                              width: 140.w,
-                              child: Image.asset(
-                                fit: BoxFit.cover,
-                                'assets/images/burger.png',
-                                width: 100.w,
-                                height: 200.h,
+                                ],
                               ),
-                            ),
-                          ],
+                              SizedBox(
+                                height: 180.h,
+                                width: 140.w,
+                                child: Image.asset(
+                                  fit: BoxFit.cover,
+                                  'assets/images/burger.png',
+                                  width: 100.w,
+                                  height: 200.h,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -197,11 +228,11 @@ class _mainhomeState extends State<mainhome> {
                                 width: 50.h,
                                 height: 40.w,
                               ),
-                            
-                            ),Text(
-                          "Hambure...",
-                          style: GoogleFonts.urbanist(color: Colors.white),
-                        ),
+                            ),
+                            Text(
+                              "Hambure...",
+                              style: GoogleFonts.urbanist(color: Colors.white),
+                            ),
                           ],
                         ),
                         Column(
@@ -214,10 +245,11 @@ class _mainhomeState extends State<mainhome> {
                                 width: 50.w,
                                 height: 40.h,
                               ),
-                            ), Text(
-                          "Pizza",
-                          style: GoogleFonts.urbanist(color: Colors.white),
-                        ),
+                            ),
+                            Text(
+                              "Pizza",
+                              style: GoogleFonts.urbanist(color: Colors.white),
+                            ),
                           ],
                         ),
                         Column(
@@ -229,13 +261,12 @@ class _mainhomeState extends State<mainhome> {
                                 'assets/images/bbbnoodls.png',
                                 width: 50.w,
                                 height: 40.h,
-                                
                               ),
-                              
-                            ),                            Text(
-                          "Noodles",
-                          style: GoogleFonts.urbanist(color: Colors.white),
-                        ),
+                            ),
+                            Text(
+                              "Noodles",
+                              style: GoogleFonts.urbanist(color: Colors.white),
+                            ),
                           ],
                         ),
                         Column(
@@ -248,17 +279,17 @@ class _mainhomeState extends State<mainhome> {
                                 width: 50.w,
                                 height: 40.h,
                               ),
-                            ),                            Text(
-                          "Meat",
-                          style: GoogleFonts.urbanist(color: Colors.white),
-                        ),
+                            ),
+                            Text(
+                              "Meat",
+                              style: GoogleFonts.urbanist(color: Colors.white),
+                            ),
                           ],
                         ),
                       ],
                     ),
-                    SizedBox(height: 12.h,),
-                   
-                                
+                    SizedBox(height: 12.h),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -272,10 +303,11 @@ class _mainhomeState extends State<mainhome> {
                                 width: 50.w,
                                 height: 40.h,
                               ),
-                            ),                            Text(
-                          "Vegeta..",
-                          style: GoogleFonts.urbanist(color: Colors.white),
-                        ),
+                            ),
+                            Text(
+                              "Vegeta..",
+                              style: GoogleFonts.urbanist(color: Colors.white),
+                            ),
                           ],
                         ),
                         Column(
@@ -288,10 +320,11 @@ class _mainhomeState extends State<mainhome> {
                                 width: 50.w,
                                 height: 40.h,
                               ),
-                            ),                            Text(
-                          "Dessert",
-                          style: GoogleFonts.urbanist(color: Colors.white),
-                        ),
+                            ),
+                            Text(
+                              "Dessert",
+                              style: GoogleFonts.urbanist(color: Colors.white),
+                            ),
                           ],
                         ),
                         Column(
@@ -304,10 +337,11 @@ class _mainhomeState extends State<mainhome> {
                                 width: 50.w,
                                 height: 40.h,
                               ),
-                            ),Text(
-                          "Drinks",
-                          style: GoogleFonts.urbanist(color: Colors.white),
-                        ),
+                            ),
+                            Text(
+                              "Drinks",
+                              style: GoogleFonts.urbanist(color: Colors.white),
+                            ),
                           ],
                         ),
                         Column(
@@ -320,15 +354,16 @@ class _mainhomeState extends State<mainhome> {
                                 width: 50.w,
                                 height: 40.h,
                               ),
-                            ), Text(
-                          "More",
-                          style: GoogleFonts.urbanist(color: Colors.white),
-                        ),
+                            ),
+                            Text(
+                              "More",
+                              style: GoogleFonts.urbanist(color: Colors.white),
+                            ),
                           ],
                         ),
                       ],
                     ),
-                   SizedBox(height: 12.h,),
+                    SizedBox(height: 12.h),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -336,7 +371,7 @@ class _mainhomeState extends State<mainhome> {
                         children: [
                           Text(
                             "Discound Guaranteed!",
-                    style: GoogleFonts.urbanist(
+                            style: GoogleFonts.urbanist(
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
                             ),
@@ -344,636 +379,703 @@ class _mainhomeState extends State<mainhome> {
                           Text(
                             "See All",
                             style: GoogleFonts.urbanist(
-                              color: const Color.fromARGB(
-                                255,
-                                14,
-                                233,
-                                14,
-                              ),
+                              color: const Color.fromARGB(255, 14, 233, 14),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    Container(
-                      height: 220.h,
-                      width: 170.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.r),
-                        color: const Color.fromARGB(255, 52, 47, 46),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 130.h,
-                              width: 130.w,
-                                
+
+
+
+                    ////LEFT SLIDE FOOD ITEMS 
+                  
+                       SingleChildScrollView(scrollDirection: Axis.horizontal,
+                         child: Row(
+                           children: [
+                            InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: ((context) => salad())),
+                        );
+                      },
+                         child:     Container(
+                              height: 220.h,
+                              width: 170.w,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20.r),
-                                
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                    "https://therecipewell.com/wp-content/uploads/2025/04/Romaine-Salad-27.jpg",
-                                  ),
-                                ),
-                                color: const Color.fromARGB(
-                                  255,
-                                  44,
-                                  41,
-                                  30,
-                                ),
+                                color: const Color.fromARGB(255, 52, 47, 46),
                               ),
-                            ),
-                            Text(
-                              "Mixed Salad Bond",
-                              style: GoogleFonts.urbanist(
-                                color: const Color.fromARGB(
-                                  255,
-                                  243,
-                                  246,
-                                  243,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              "1.5 km |* 4.8(1.2k)",
-                              style: GoogleFonts.urbanist(
-                                color: const Color.fromARGB(
-                                  255,
-                                  243,
-                                  246,
-                                  243,
-                                ),
-                                fontSize: 8.sp,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "₹6.00",
-                                  style: GoogleFonts.urbanist(
-                                    color: const Color.fromARGB(
-                                      255,
-                                      243,
-                                      246,
-                                      243,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 130.h,
+                                      width: 130.w,
+                                                   
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20.r),
+                                                   
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image:AssetImage('assets/images/slad og.png')
+                                        ),
+                                        color: const Color.fromARGB(255, 44, 41, 30),
+                                      ),
                                     ),
+                                    Text(
+                                      "Mixed Salad Bond",
+                                      style: GoogleFonts.urbanist(
+                                        color: const Color.fromARGB(255, 243, 246, 243),
+                                      ),
+                                    ),
+                                    Text(
+                                      "1.5 km |* 4.8(1.2k)",
+                                      style: GoogleFonts.urbanist(
+                                        color: const Color.fromARGB(255, 243, 246, 243),
+                                        fontSize: 8.sp,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "₹180",
+                                          style: GoogleFonts.urbanist(
+                                            color: const Color.fromARGB(
+                                              255,
+                                              243,
+                                              246,
+                                              243,
+                                            ),
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Icon(Icons.favorite_outline),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                                                   ),),SizedBox(width: 19.w,),
+
+                             Container(
+                              height: 220.h,
+                              width: 170.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20.r),
+                                color: const Color.fromARGB(255, 52, 47, 46),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                     InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: ((context) => laddu())),
+                        );
+                      },
+                                      child: Container(
+                                        height: 130.h,
+                                        width: 130.w,
+                                                     
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20.r),
+                                                     
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: AssetImage('assets/images/laddu .png'),
+                                          ),
+                                          color: const Color.fromARGB(255, 44, 41, 30),
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      "Laddu",
+                                      style: GoogleFonts.urbanist(
+                                        color: const Color.fromARGB(255, 243, 246, 243),
+                                      ),
+                                    ),
+                                    Text(
+                                      "800 m |* 4.8(1.8k)",
+                                      style: GoogleFonts.urbanist(
+                                        color: const Color.fromARGB(255, 243, 246, 243),
+                                        fontSize: 8.sp,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "₹130.00",
+                                          style: GoogleFonts.urbanist(
+                                            color: const Color.fromARGB(
+                                              255,
+                                              243,
+                                              246,
+                                              243,
+                                            ),
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Icon(Icons.favorite_outline),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),   SizedBox(width: 19.w,),
+                             InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: ((context) => usa())),
+                        );
+                      },
+                              child: Container(
+                                height: 220.h,
+                                width: 170.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.r),
+                                  color: const Color.fromARGB(255, 52, 47, 46),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 130.h,
+                                        width: 130.w,
+                                                     
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20.r),
+                                                     
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: AssetImage('assets/images/usa.png')
+                                          ),
+                                          color: const Color.fromARGB(255, 44, 41, 30),
+                                        ),
+                                      ),
+                                      Text(
+                                        "Gulab",
+                                        style: GoogleFonts.urbanist(
+                                          color: const Color.fromARGB(255, 243, 246, 243),
+                                        ),
+                                      ),
+                                      Text(
+                                        "2,3 km |* 4.8(1.2k)",
+                                        style: GoogleFonts.urbanist(
+                                          color: const Color.fromARGB(255, 243, 246, 243),
+                                          fontSize: 8.sp,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "₹170",
+                                            style: GoogleFonts.urbanist(
+                                              color: const Color.fromARGB(
+                                                255,
+                                                243,
+                                                246,
+                                                243,
+                                              ),
+                                            ),
+                                          ),
+                                          Spacer(),
+                                          Icon(Icons.favorite_outline),
+                                        ],
+                                      )
+                                    ],
                                   ),
                                 ),
-                                Spacer(),
-                                Icon(Icons.favorite_outline),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                                                      ),
+                            ), SizedBox(width: 19.w,),  
+                         InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: ((context) => dosha())),
+                        );
+                      },
+                          child: Container(
+                                height: 220.h,
+                                width: 170.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.r),
+                                  color: const Color.fromARGB(255, 52, 47, 46),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 130.h,
+                                        width: 130.w,
+                                                     
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20.r),
+                                                     
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image:AssetImage('assets/images/dosha.png')
+                                          ),
+                                          color: const Color.fromARGB(255, 44, 41, 30),
+                                        ),
+                                      ),
+                                      Text(
+                                        "Mixed Salad Bond",
+                                        style: GoogleFonts.urbanist(
+                                          color: const Color.fromARGB(255, 243, 246, 243),
+                                        ),
+                                      ),
+                                      Text(
+                                        "1.5 km |* 4.8(1.2k)",
+                                        style: GoogleFonts.urbanist(
+                                          color: const Color.fromARGB(255, 243, 246, 243),
+                                          fontSize: 8.sp,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "₹70",
+                                            style: GoogleFonts.urbanist(
+                                              color: const Color.fromARGB(
+                                                255,
+                                                243,
+                                                246,
+                                                243,
+                                              ),
+                                            ),
+                                          ),
+                                          Spacer(),
+                                          Icon(Icons.favorite_outline),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                          ),
+                        ),                   
+                           ],
+                         ),
+                       ),]
                     ),
-                                
+
                     //ALL,Hamburger,pizza,.......
                     Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: SizedBox(
-                        height: 40.h,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
+  padding: const EdgeInsets.symmetric(vertical: 8.0),
+  child: SizedBox(
+    height: 48.h, // ഹൈറ്റ് അല്പം കൂട്ടി നൽകുക
+    child: ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemCount: categories.length, // നിങ്ങളുടെ കാറ്റഗറി ഡാറ്റ ലിസ്റ്റ്
+      separatorBuilder: (context, index) => SizedBox(width: 8.w),
+      itemBuilder: (context, index) {
+        final category = categories[index];
+        return Chip(
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          visualDensity: VisualDensity.compact,
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+          labelPadding: EdgeInsets.only(left: 4.w),
+          label: Text(
+            category['name'],
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 14.sp,
+            ),
+          ),
+          backgroundColor: const Color.fromARGB(255, 10, 11, 9),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.r),
+          ),
+          side: const BorderSide(color: Colors.green),
+          avatar: Icon(
+            category['icon'],
+            color: Colors.green,
+            size: 18.sp,
+          ),
+        );
+      },
+    ),
+  ),
+),
+                   
+
+                    // ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: ((context) => burger())),
+                        );
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: 115.h,
+                        margin: EdgeInsets.only(bottom: 16),
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 32, 33, 35),
+                          borderRadius: BorderRadius.circular(24.r),
+                        ),
+                        child: Row(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Chip(padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-    labelPadding: EdgeInsets.only(left: 4.w), // ഐക്കണും ടെക്സ്റ്റും തമ്മിലുള്ള അകലം
-    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap, // അധികമുള്ള ബിൽറ്റ്-ഇൻ വിഡ്ത്ത്/ഹൈറ്റ് ഒഴിവാക്കാൻ
-    visualDensity: VisualDensity.compact,
-                                label: Text(
-                                  "All",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                backgroundColor: const Color.fromARGB(
-                                  255,
-                                  10,
-                                  11,
-                                  9,
-                                ),
-                                
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadiusGeometry.circular(20.r),
-                                ),
-                                side: BorderSide(color: Colors.green),
-                                avatar: Icon(
-                                  Icons.fastfood_outlined,
-                                  color: Colors.green,
-                                  size: 16,
-                                ),
+                            ClipRRect(
+                              borderRadius: BorderRadiusGeometry.circular(12.r),
+                              child: Image.asset(
+                                'assets/images/burger.png',
+                                width: 80.w,
+                                height: 80.h,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Chip(
-                                label: Text(
-                                  "Hamburger",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                backgroundColor: const Color.fromARGB(
-                                  255,
-                                  10,
-                                  11,
-                                  9,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 8,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadiusGeometry.circular(30),
-                                ),
-                                side: BorderSide(color: Colors.green),
-                                avatar: Icon(
-                                  Icons.fastfood_outlined,
-                                  color: Colors.green,
-                                  size: 16,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Chip(
-                                label: Text(
-                                  "Pizza",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                backgroundColor: const Color.fromARGB(
-                                  255,
-                                  10,
-                                  11,
-                                  9,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 8,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadiusGeometry.circular(30.sp),
-                                ),
-                                side: BorderSide(color: Colors.green),
-                                avatar: Icon(
-                                  Icons.fastfood_outlined,
-                                  color: Colors.green,
-                                  size: 16,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Chip(
-                                label: Text(
-                                  "Noodles",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                backgroundColor: const Color.fromARGB(
-                                  255,
-                                  10,
-                                  11,
-                                  9,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 8,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadiusGeometry.circular(30.sp),
-                                ),
-                                side: BorderSide(color: Colors.green),
-                                avatar: Icon(
-                                  Icons.fastfood_outlined,
-                                  color: Colors.green,
-                                  size: 16,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Chip(
-                                label: Text(
-                                  "Meat",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                backgroundColor: const Color.fromARGB(
-                                  255,
-                                  10,
-                                  11,
-                                  9,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 8,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadiusGeometry.circular(30.sp),
-                                ),
-                                side: BorderSide(color: Colors.green),
-                                avatar: Icon(
-                                  Icons.fastfood_outlined,
-                                  color: Colors.green,
-                                  size: 16,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Chip(
-                                label: Text(
-                                  "Drinks",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                backgroundColor: const Color.fromARGB(
-                                  255,
-                                  10,
-                                  11,
-                                  9,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 8,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadiusGeometry.circular(30.sp),
-                                ),
-                                side: BorderSide(color: Colors.green),
-                                avatar: Icon(
-                                  Icons.fastfood_outlined,
-                                  color: Colors.green,
-                                  size: 16,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Chip(
-                                label: Text(
-                                  "Dessert",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                backgroundColor: const Color.fromARGB(
-                                  255,
-                                  10,
-                                  11,
-                                  9,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 8,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadiusGeometry.circular(30.sp),
-                                ),
-                                side: BorderSide(color: Colors.green),
-                                avatar: Icon(
-                                  Icons.fastfood_outlined,
-                                  color: Colors.green,
-                                  size: 16,
-                                ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Burger hut",
+                                    style: GoogleFonts.urbanist(
+                                      color: Colors.white,
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 6.h),
+                                  Text(
+                                    "1.2 km |*4.5(1.9k)",
+                                    style: GoogleFonts.urbanist(
+                                      color: Colors.white,
+                                      fontSize: 8,
+                                    ),
+                                  ),
+                                  SizedBox(height: 12.h),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.delivery_dining,
+                                        color: const Color.fromARGB(
+                                          255,
+                                          52,
+                                          249,
+                                          17,
+                                        ),
+                                      ),
+                                      SizedBox(width: 5.w),
+
+                                     Text(
+                                          "₹240",
+                                          style: GoogleFonts.urbanist(
+                                            color: const Color.fromARGB(
+                                              255,
+                                              243,
+                                              246,
+                                              243,
+                                            ),
+                                          ),
+                                        ),
+                                      const Spacer(),
+                                      Icon(
+                                        Icons.favorite_outline,
+                                        color: Colors.red,
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
                       ),
                     ),
-                    Container(
-                      width:double.infinity,
-                      height: 115.h,
-                      margin: EdgeInsets.only(bottom: 16),
-                      padding: EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 32, 33, 35),
-                        borderRadius: BorderRadius.circular(24.r),
-                      ),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadiusGeometry.circular(
-                              12.r,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: ((context) => pizza())),
+                        );
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: 115.h,
+                        margin: EdgeInsets.only(bottom: 16.h),
+                        padding: EdgeInsets.all(12.w),
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 32, 33, 35),
+                          borderRadius: BorderRadius.circular(24.r),
+                        ),
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadiusGeometry.circular(12.r),
+                              child: Image.network(
+                                "https://www.superhealthykids.com/wp-content/uploads/2021/10/best-veggie-pizza-featured-image-square-2.jpg",
+                                width: 80.w,
+                                height: 80.h,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            child: Image.asset(
-                              'assets/images/burger.png',
-                              width: 80.w,
-                              height: 80.h,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Burger hut",
-                                  style: GoogleFonts.urbanist(
-                                    color: Colors.white,
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.bold,
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Pizza Hut -Lumintu",
+                                    style: GoogleFonts.urbanist(
+                                      color: Colors.white,
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 6.h),
-                                Text(
-                                  "1.2 km |*4.5(1.9k)",
-                                  style: GoogleFonts.urbanist(
-                                    color: Colors.white,
-                                    fontSize: 8,
+                                  SizedBox(height: 6.h),
+                                  Text(
+                                    "800 m |*4.9(2.3k)",
+                                    style: GoogleFonts.urbanist(
+                                      color: Colors.white,
+                                      fontSize: 8.sp,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 12.h),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.delivery_dining,
-                                      color: const Color.fromARGB(
-                                        255,
-                                        52,
-                                        249,
-                                        17,
+                                  SizedBox(height: 12.h),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.delivery_dining,
+                                        color: const Color.fromARGB(
+                                          255,
+                                          52,
+                                          249,
+                                          17,
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(width: 5.w,),
-                                
-                                    Text(
-                                      "₹250",
-                                      style: GoogleFonts.urbanist(
-                                        color: Colors.white,
-                                        fontSize: 8.sp,
+                                      SizedBox(width: 5.w),
+                                     Text(
+                                          "₹300",
+                                          style: GoogleFonts.urbanist(
+                                            color: const Color.fromARGB(
+                                              255,
+                                              243,
+                                              246,
+                                              243,
+                                            ),
+                                          ),
+                                        ),
+                                      Spacer(),
+                                      Icon(
+                                        Icons.favorite_outline,
+                                        color: const Color.fromARGB(
+                                          255,
+                                          239,
+                                          11,
+                                          11,
+                                        ),
                                       ),
-                                    ),
-                                   const Spacer(),
-                                   Icon(Icons.favorite_outline,
-                                   color: Colors.red,)
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width:double.infinity,
-                      height: 115.h,
-                      margin: EdgeInsets.only(bottom: 16.h),
-                      padding: EdgeInsets.all(12.w),
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 32, 33, 35),
-                        borderRadius: BorderRadius.circular(24.r),
-                      ),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadiusGeometry.circular(
-                              12.r,
-                            ),
-                            child: Image.network(
-                              "https://www.superhealthykids.com/wp-content/uploads/2021/10/best-veggie-pizza-featured-image-square-2.jpg",
-                              width: 80.w,
-                              height: 80.h,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Pizza Hut -Lumintu",
-                                  style: GoogleFonts.urbanist(
-                                    color: Colors.white,
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.bold,
+                                    ],
                                   ),
-                                ),
-                                SizedBox(height: 6.h),
-                                Text(
-                                  "800 m |*4.9(2.3k)",
-                                  style: GoogleFonts.urbanist(
-                                    color: Colors.white,
-                                    fontSize: 8.sp,
-                                  ),
-                                ),
-                                SizedBox(height: 12.h),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.delivery_dining,
-                                      color: const Color.fromARGB(
-                                        255,
-                                        52,
-                                        249,
-                                        17,
-                                      ),
-                                    ),
-                                    SizedBox(width: 5.w,),
-                                    Text(
-                                      "₹300",
-                                      style: GoogleFonts.urbanist(
-                                        color: Colors.white,
-                                        fontSize: 8.sp,
-                                      ),
-                                    ),
-                                     Spacer(),
-                                    Icon(
-                                      Icons.favorite_outline,
-                                      color: const Color.fromARGB(
-                                        255,
-                                        239,
-                                        11,
-                                        11,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                    Container(
-                      width: double.infinity,
-                      height: 115.h,
-                      margin: EdgeInsets.only(bottom: 16.h),
-                      padding: EdgeInsets.all(12.w),
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 32, 33, 35),
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadiusGeometry.circular(
-                              12.r,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: ((context) => noodles())),
+                        );
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: 115.h,
+                        margin: EdgeInsets.only(bottom: 16.h),
+                        padding: EdgeInsets.all(12.w),
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 32, 33, 35),
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadiusGeometry.circular(12.r),
+                              child: Image.network(
+                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWjiGUvoTxQJYxl9FnhWEuD1pAT0PkrI_4ca2awGyu_w&s=10",
+                                width: 80.w,
+                                height: 80.h,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            child: Image.network(
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWjiGUvoTxQJYxl9FnhWEuD1pAT0PkrI_4ca2awGyu_w&s=10",
-                              width: 80.w,
-                              height: 80.h,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Vegetarian Noodles",
-                                  style: GoogleFonts.urbanist(
-                                    color: Colors.white,
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.bold,
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Vegetarian Noodles",
+                                    style: GoogleFonts.urbanist(
+                                      color: Colors.white,
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 6.h),
-                                Text(
-                                  "1.7 km |*4.6(4.9k)",
-                                  style: GoogleFonts.urbanist(
-                                    color: Colors.white,
-                                    fontSize: 8.sp,
+                                  SizedBox(height: 6.h),
+                                  Text(
+                                    "1.7 km |*4.6(4.9k)",
+                                    style: GoogleFonts.urbanist(
+                                      color: Colors.white,
+                                      fontSize: 8.sp,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 12.h),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.delivery_dining,
-                                      color: const Color.fromARGB(
-                                        255,
-                                        52,
-                                        249,
-                                        17,
+                                  SizedBox(height: 12.h),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.delivery_dining,
+                                        color: const Color.fromARGB(
+                                          255,
+                                          52,
+                                          249,
+                                          17,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      "₹190",
-                                      style: GoogleFonts.urbanist(
-                                        color: Colors.white,
-                                        fontSize: 9.sp,
+                                      Text(
+                                          "₹200",
+                                          style: GoogleFonts.urbanist(
+                                            color: const Color.fromARGB(
+                                              255,
+                                              243,
+                                              246,
+                                              243,
+                                            ),
+                                          ),
+                                        ),
+                                      Spacer(),
+                                      Icon(
+                                        Icons.favorite_outline,
+                                        color: const Color.fromARGB(
+                                          255,
+                                          239,
+                                          11,
+                                          11,
+                                        ),
                                       ),
-                                    ),
-                                    Spacer(),
-                                    Icon(
-                                      Icons.favorite_outline,
-                                      color: const Color.fromARGB(
-                                        255,
-                                        239,
-                                        11,
-                                        11,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                    Container(
-                      width: double.infinity,
-                      height: 115.h,
-                      margin: EdgeInsets.only(bottom: 16.h),
-                      padding: EdgeInsets.all(12.w),
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 32, 33, 35),
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadiusGeometry.circular(
-                              12.r,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: ((context) => salad())),
+                        );
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: 115.h,
+                        margin: EdgeInsets.only(bottom: 16.h),
+                        padding: EdgeInsets.all(12.w),
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 32, 33, 35),
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadiusGeometry.circular(12.r),
+                              child: Image.network(
+                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5tfrBlYxnPexSxvBmsXBEQ1ZVK6wEALYvIJKR8XHE_A&s=10",
+                                width: 80.w,
+                                height: 80.h,
+                                fit: BoxFit.cover,
+                              ),
+                              // child: Image.asset(
+                              //   'assets/images/burger.png',
+                              //   width: 80,
+                              //   height: 80,
+                              //   fit: BoxFit.cover,
+                              // ),
                             ),
-                            child: Image.network(
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5tfrBlYxnPexSxvBmsXBEQ1ZVK6wEALYvIJKR8XHE_A&s=10",
-                              width: 80.w,
-                              height: 80.h,
-                              fit: BoxFit.cover,
-                            ),
-                            // child: Image.asset(
-                            //   'assets/images/burger.png',
-                            //   width: 80,
-                            //   height: 80,
-                            //   fit: BoxFit.cover,
-                            // ),
-                          ),
-                           SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Fruit Salad-Kumpa",
-                                  style: GoogleFonts.urbanist(
-                                    color: Colors.white,
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.bold,
+                            SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Fruit Salad-Kumpa",
+                                    style: GoogleFonts.urbanist(
+                                      color: Colors.white,
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 6.h),
-                                Text(
-                                  "2.6 km |*4.5(1.9k)",
-                                  style: GoogleFonts.urbanist(
-                                    color: Colors.white,
-                                    fontSize: 8.sp,
+                                  SizedBox(height: 6.h),
+                                  Text(
+                                    "2.6 km |*4.5(1.9k)",
+                                    style: GoogleFonts.urbanist(
+                                      color: Colors.white,
+                                      fontSize: 8.sp,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 12.h),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.delivery_dining,
-                                      color: const Color.fromARGB(
-                                        255,
-                                        52,
-                                        249,
-                                        17,
+                                  SizedBox(height: 12.h),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.delivery_dining,
+                                        color: const Color.fromARGB(
+                                          255,
+                                          52,
+                                          249,
+                                          17,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      "₹250",
-                                      style: GoogleFonts.urbanist(
-                                        color: Colors.white,
-                                        fontSize: 8.sp,
+                                      Text(
+                                          "₹180",
+                                          style: GoogleFonts.urbanist(
+                                            color: const Color.fromARGB(
+                                              255,
+                                              243,
+                                              246,
+                                              243,
+                                            ),
+                                          ),
+                                        ),
+                                      Spacer(),
+                                      Icon(
+                                        Icons.favorite_outline,
+                                        color: const Color.fromARGB(
+                                          255,
+                                          239,
+                                          11,
+                                          11,
+                                        ),
                                       ),
-                                    ),
-                                    Spacer(),
-                                    Icon(
-                                      Icons.favorite_outline,
-                                      color: const Color.fromARGB(
-                                        255,
-                                        239,
-                                        11,
-                                        11,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
-                ),
-              ],
-            )
-          : _pages[_currentIntex],
+                ):
+              
+            
+           _pages[_currentIntex],
       bottomNavigationBar: CurvedNavigationBar(
         index: _currentIntex,
         height: 70,
