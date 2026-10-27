@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mynewapp/food_delivery_app/introhome1(03-1).dart';
+import 'package:mynewapp/introhome1(03-1).dart';
 
 // ignore: camel_case_types
 class profilfill extends StatefulWidget {

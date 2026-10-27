@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mynewapp/food_delivery_app/creatnewaccound.dart';
-import 'package:mynewapp/food_delivery_app/forgetpassword.dart';
-import 'package:mynewapp/food_delivery_app/introhome1(03-1).dart';
+import 'package:mynewapp/creatnewaccound.dart';
+import 'package:mynewapp/forgetpassword.dart';
+import 'package:mynewapp/introhome1(03-1).dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

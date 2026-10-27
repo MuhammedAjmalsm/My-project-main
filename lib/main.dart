@@ -1,13 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mynewapp/firebase_options.dart';
+import 'package:mynewapp/food_delivery_app/survers/firebase_options.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mynewapp/food_delivery_app/introhome1(03-1).dart';
-import 'package:mynewapp/food_delivery_app/page123.dart';
+import 'package:mynewapp/Home.dart';
+import 'package:mynewapp/welcom.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:mynewapp/cart_provider.dart';
 
 void main()async {
+
+
   
 
 
@@ -25,7 +29,14 @@ void main()async {
   //LOGIN STATUS CHEKING 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
-  runApp(MyApp(isLoggedIn: isLoggedIn));
+
+  runApp(
+  ChangeNotifierProvider(
+    create: (context) => CartProvider(),
+    child: MyApp(isLoggedIn: isLoggedIn),
+  ),
+);
+  
 }
 
 class MyApp extends StatelessWidget {
@@ -45,10 +56,10 @@ class MyApp extends StatelessWidget {
           title: 'Flutter ScreenUtil Plus Example',
 
           // Use ResponsiveTheme to automatically scale all text styles
-          home: isLoggedIn ? const mainhome() : loggin(),
+          home: isLoggedIn ? const mainhome() : welcom(),
         );
       },
-      child:loggin(),
+      child:welcom(),
     );
   }
 }

@@ -1,16 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mynewapp/food_delivery_app/favourites.dart';
+import 'package:mynewapp/favourites.dart';
+import 'package:url_launcher/url_launcher.dart'; //ethe kodukikanum
 
-class usa extends StatefulWidget {
-  const usa({super.key});
+
+class dosha extends StatefulWidget {
+  const dosha({super.key});
 
   @override
-  State<usa> createState() => _usaState();
+  State<dosha> createState() => _doshaState();
 }
 
-class _usaState extends State<usa> {
+class _doshaState extends State<dosha> {
+   // 2. GPay / UPI ഓപ്പൺ ചെയ്യാനുള്ള ഫംഗ്ഷൻ ഇവിടെ ചേർക്കുക
+  void openGooglePay() async {
+    String upiId = "mhdajmalsm8848@oksbi"; // നിങ്ങളുടെ യഥാർത്ഥ UPI ID ഇവിടെ നൽകുക
+    String name = "Dosha";
+    String amount = "70.00"; // ബർഗറിന്റെ വില
+    String note = "Payment for Dosha";
+
+    String uri = 'upi://pay?pa=$upiId&pn=$name&am=$amount&cu=INR&tn=$note';
+
+    Uri url = Uri.parse(uri);
+    try {
+    // externalApplication-ന് പകരം externalNonBrowserApplication ഉപയോഗിക്കുക
+    bool launched = await launchUrl(
+      url, 
+      mode: LaunchMode.externalNonBrowserApplication,
+    );
+    
+    if (!launched) {
+      throw 'Could not launch';
+    }
+  } catch (e) {
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('UPI app not found or could not open payment!')),
+      );
+    }
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: AppBar(
@@ -60,7 +90,7 @@ class _usaState extends State<usa> {
                 alignment: AlignmentGeometry.topCenter,
                 child: Image.asset(
                   fit: BoxFit.fitWidth,
-                  'assets/images/usa.png',
+                  'assets/images/dosha.png',
                   width: 350.w,
                   height: 300.h,
                 ),
@@ -78,7 +108,7 @@ class _usaState extends State<usa> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Gulab",
+                            "Dosha",
                             style: GoogleFonts.urbanist(
                               fontSize: 26.sp,
                               fontWeight: FontWeight.bold,
@@ -86,7 +116,7 @@ class _usaState extends State<usa> {
                             ),
                           ),
                           Text(
-                            "Rs 170",
+                            "Rs 70",
                             style: GoogleFonts.urbanist(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -163,7 +193,34 @@ class _usaState extends State<usa> {
                             color: Colors.white,
                           ),
                         ),),
-                    )
+                    ),
+                      SizedBox(height: 15.h),
+                    // 3. GPay വഴി പണം നൽകാനുള്ള പുതിയ ബട്ടൺ (Buy Now / GPay)
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50.h,
+                      child: OutlinedButton.icon(
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.green),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.r),
+                          ),
+                        ),
+                        onPressed: openGooglePay, // <--- ഇവിടെ ഫംഗ്ഷൻ വിളിക്കുന്നു
+                        icon: const Icon(
+                          Icons.payment,
+                          color: Color.fromARGB(255, 45, 177, 49),
+                        ),
+                        label: Text(
+                          "Pay ₹70 with GPay / UPI",
+                          style: GoogleFonts.urbanist(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

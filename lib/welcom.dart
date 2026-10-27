@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:mynewapp/food_delivery_app/relogin.dart';
+import 'package:mynewapp/relogin.dart';
 
-class loggin extends StatefulWidget {
-  const loggin({super.key});
+class welcom extends StatefulWidget {
+  const welcom({super.key});
 
   @override
-  State<loggin> createState() => _logginState();
+  State<welcom> createState() => _welcomState();
 }
 
-class _logginState extends State<loggin> {
+class _welcomState extends State<welcom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

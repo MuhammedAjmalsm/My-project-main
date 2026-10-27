@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mynewapp/food_delivery_app/favourites.dart';
+import 'package:mynewapp/favourites.dart';
 
 class noodles extends StatefulWidget {
   const noodles({super.key});

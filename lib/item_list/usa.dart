@@ -1,50 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mynewapp/food_delivery_app/favourites.dart';
-import 'package:url_launcher/url_launcher.dart'; //ethe kodukikanum
+import 'package:mynewapp/favourites.dart';
 
-class burger extends StatefulWidget {
-  const burger({super.key});
+class usa extends StatefulWidget {
+  const usa({super.key});
 
   @override
-  State<burger> createState() => _burgerState();
+  State<usa> createState() => _usaState();
 }
 
-class _burgerState extends State<burger> {
-  // 2. GPay / UPI ഓപ്പൺ ചെയ്യാനുള്ള ഫംഗ്ഷൻ ഇവിടെ ചേർക്കുക
-  void openGooglePay() async {
-    String upiId = "mhdajmalsm8848@oksbi"; // നിങ്ങളുടെ യഥാർത്ഥ UPI ID ഇവിടെ നൽകുക
-    String name = "Burger Hut";
-    String amount = "40.00"; // ബർഗറിന്റെ വില
-    String note = "Payment for Burger";
-
-    String uri = 'upi://pay?pa=$upiId&pn=$name&am=$amount&cu=INR&tn=$note';
-
-    Uri url = Uri.parse(uri);
-    try {
-    // externalApplication-ന് പകരം externalNonBrowserApplication ഉപയോഗിക്കുക
-    bool launched = await launchUrl(
-      url, 
-      mode: LaunchMode.externalNonBrowserApplication,
-    );
-    
-    if (!launched) {
-      throw 'Could not launch';
-    }
-  } catch (e) {
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('UPI app not found or could not open payment!')),
-      );
-    }
-  }
-}
+class _usaState extends State<usa> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 45, 177, 49),
+    return Scaffold(appBar: AppBar(
+       backgroundColor:Color.fromARGB(255, 45, 177, 49),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -65,6 +35,7 @@ class _burgerState extends State<burger> {
       backgroundColor: const Color.fromARGB(255, 30, 30, 30),
 
       body: Container(
+        
         child: Stack(
           clipBehavior: Clip.none,
           children: <Widget>[
@@ -89,7 +60,7 @@ class _burgerState extends State<burger> {
                 alignment: AlignmentGeometry.topCenter,
                 child: Image.asset(
                   fit: BoxFit.fitWidth,
-                  'assets/images/subburger.png',
+                  'assets/images/usa.png',
                   width: 350.w,
                   height: 300.h,
                 ),
@@ -99,8 +70,7 @@ class _burgerState extends State<burger> {
             Padding(
               padding: const EdgeInsets.all(23),
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 350),
@@ -108,7 +78,7 @@ class _burgerState extends State<burger> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Hamburger",
+                            "Gulab",
                             style: GoogleFonts.urbanist(
                               fontSize: 26.sp,
                               fontWeight: FontWeight.bold,
@@ -116,25 +86,23 @@ class _burgerState extends State<burger> {
                             ),
                           ),
                           Text(
-                            "Rs 40",
+                            "Rs 170",
                             style: GoogleFonts.urbanist(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 45, 177, 49),
+                            color: Color.fromARGB(255, 45, 177, 49),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 15.h),
+                    SizedBox(height: 15.h,),
                     Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
+                          
+                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        decoration: BoxDecoration(
                             color: Colors.green.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Colors.green),
@@ -149,12 +117,10 @@ class _burgerState extends State<burger> {
                           ),
                         ),
                         SizedBox(width: 15.w),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
+                          Container(
+                          
+                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        decoration: BoxDecoration(
                             color: Colors.green.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Colors.green),
@@ -168,9 +134,10 @@ class _burgerState extends State<burger> {
                             ),
                           ),
                         ),
+                       
+
                       ],
-                    ),
-                    SizedBox(height: 10.w),
+                    ), SizedBox(height: 10.w),
                     Text(
                       "The Cheeseburger Wendy's Burger is a classic fast food burger that packs a punch of flavor in every bite. Made with a juicy beef patty cooked to perfection, it's topped with melted American cheese, crispy lettuce, ripe tomato, and crunchy pickles.",
                       style: GoogleFonts.urbanist(
@@ -179,61 +146,24 @@ class _burgerState extends State<burger> {
                         height: 1.5,
                       ),
                     ),
-                    SizedBox(height: 35.h),
+                    SizedBox(height: 35.h,),
                     SizedBox(
                       width: double.infinity,
                       height: 50.h,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(
-                            255,
-                            45,
-                            177,
-                            49,
-                          ),
+                      child: ElevatedButton(style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(255, 45, 177, 49),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.r),
                           ),
-                        ),
-                        onPressed: () {},
-                        child: Text(
+                        ),onPressed: (){}, child: Text(
                           "Add to Cart",
                           style: GoogleFonts.urbanist(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 15.h),
-                    // 3. GPay വഴി പണം നൽകാനുള്ള പുതിയ ബട്ടൺ (Buy Now / GPay)
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50.h,
-                      child: OutlinedButton.icon(
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.green),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.r),
-                          ),
-                        ),
-                        onPressed: openGooglePay, // <--- ഇവിടെ ഫംഗ്ഷൻ വിളിക്കുന്നു
-                        icon: const Icon(
-                          Icons.payment,
-                          color: Color.fromARGB(255, 45, 177, 49),
-                        ),
-                        label: Text(
-                          "Pay ₹40 with GPay / UPI",
-                          style: GoogleFonts.urbanist(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-
+                        ),),
+                    )
                   ],
                 ),
               ),

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mynewapp/food_delivery_app/favourites.dart';
+import 'package:mynewapp/favourites.dart';
 
-class laddu extends StatefulWidget {
-  const laddu({super.key});
+class salad extends StatefulWidget {
+  const salad({super.key});
 
   @override
-  State<laddu> createState() => _ladduState();
+  State<salad> createState() => _saladState();
 }
 
-class _ladduState extends State<laddu> {
+class _saladState extends State<salad> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: AppBar(
@@ -60,8 +60,8 @@ class _ladduState extends State<laddu> {
                 alignment: AlignmentGeometry.topCenter,
                 child: Image.asset(
                   fit: BoxFit.fitWidth,
-                  'assets/images/laddu .png',
-                  width: 350.w,
+                  'assets/images/slad og.png',
+                  width: 300.w,
                   height: 300.h,
                 ),
               ),
@@ -78,7 +78,7 @@ class _ladduState extends State<laddu> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Laddu",
+                            "Salad",
                             style: GoogleFonts.urbanist(
                               fontSize: 26.sp,
                               fontWeight: FontWeight.bold,
@@ -86,7 +86,7 @@ class _ladduState extends State<laddu> {
                             ),
                           ),
                           Text(
-                            "Rs 130",
+                            "Rs 180",
                             style: GoogleFonts.urbanist(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -115,8 +115,7 @@ class _ladduState extends State<laddu> {
                               color: Color.fromARGB(255, 45, 177, 49),
                             ),
                           ),
-                        ),
-                        SizedBox(width: 15.w),
+                        ),SizedBox(width: 15.w),
                           Container(
                           
                           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),

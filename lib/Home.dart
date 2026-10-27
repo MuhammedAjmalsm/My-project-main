@@ -3,19 +3,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mynewapp/food_delivery_app/Notification.dart';
-import 'package:mynewapp/food_delivery_app/Orders(tapbar).dart';
-import 'package:mynewapp/food_delivery_app/dataprofile.dart';
-import 'package:mynewapp/food_delivery_app/favourites.dart';
-import 'package:mynewapp/food_delivery_app/message(tapbar).dart';
-import 'package:mynewapp/food_delivery_app/mycart.dart';
-import 'package:mynewapp/food_delivery_app/subpages/burger.dart';
-import 'package:mynewapp/food_delivery_app/subpages/dosha.dart';
-import 'package:mynewapp/food_delivery_app/subpages/laddu.dart';
-import 'package:mynewapp/food_delivery_app/subpages/noodles.dart';
-import 'package:mynewapp/food_delivery_app/subpages/pizza.dart';
-import 'package:mynewapp/food_delivery_app/subpages/salad.dart';
-import 'package:mynewapp/food_delivery_app/subpages/usa.dart';
+import 'package:mynewapp/Notification.dart';
+import 'package:mynewapp/Orders(tapbar).dart';
+import 'package:mynewapp/dataprofile.dart';
+import 'package:mynewapp/favourites.dart';
+import 'package:mynewapp/message(tapbar).dart';
+import 'package:mynewapp/mycart.dart';
+import 'package:mynewapp/subpages/burger.dart';
+import 'package:mynewapp/subpages/dosha.dart';
+import 'package:mynewapp/subpages/laddu.dart';
+import 'package:mynewapp/subpages/noodles.dart';
+import 'package:mynewapp/subpages/pizza.dart';
+import 'package:mynewapp/subpages/salad.dart';
+import 'package:mynewapp/subpages/usa.dart';
 
 class mainhome extends StatefulWidget {
   const mainhome({super.key});
@@ -82,52 +82,39 @@ bool isFavorite = false;
                     "Deliver to",
                     style: TextStyle(color: Colors.white, fontSize: 11.sp),
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "Times Square",
-                        style: TextStyle(color: Colors.white, fontSize: 18.sp),
-                      ),
-                    ],
+                  Text(
+                    "Times Square",
+                    style: TextStyle(color: Colors.white, fontSize: 17.sp),
                   ),
                 ],
               ),
               actions: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => favorates()),
-                      );
-                    },
-                    icon: Icon(Icons.favorite_outline),
-                  ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => favorates()),
+                    );
+                  },
+                  icon: Icon(Icons.favorite_outline),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => notification()),
-                      );
-                    },
-                    icon: Icon(Icons.notifications),
-                  ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => notification()),
+                    );
+                  },
+                  icon: Icon(Icons.notifications),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => mycart()),
-                      );
-                    },
-                    icon: Icon(Icons.shopping_cart_outlined),
-                  ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => mycart()),
+                    );
+                  },
+                  icon: Icon(Icons.shopping_cart_outlined),
                 ),
               ],
             )
@@ -176,39 +163,37 @@ bool isFavorite = false;
                           ),
                           child: Row(
                             children: [
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 12),
-                                    child: Text(
-                                      "30%",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 45.sp,
-                                        color: CupertinoColors
-                                            .secondarySystemGroupedBackground,
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 12),
+                                      child: Text(
+                                        "30%",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 45.sp,
+                                          color: CupertinoColors
+                                              .secondarySystemGroupedBackground,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Text(
-                                    "    DISCOUNT ONLY\n   VALID FOR TODAY!                     ",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.urbanist(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w900,
+                                    Text(
+                                      "    DISCOUNT ONLY\n   VALID FOR TODAY!                     ",
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.urbanist(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w900,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 180.h,
-                                width: 140.w,
-                                child: Image.asset(
-                                  fit: BoxFit.cover,
-                                  'assets/images/burger.png',
-                                  width: 100.w,
-                                  height: 200.h,
+                                  ],
                                 ),
+                              ),
+                              Image.asset(
+                                fit: BoxFit.cover,
+                                'assets/images/burger.png',
+                                width: 150.w,
+                                height: 200.h,
                               ),
                             ],
                           ),

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mynewapp/food_delivery_app/favourites.dart';
+import 'package:mynewapp/favourites.dart';
 
-class dosha extends StatefulWidget {
-  const dosha({super.key});
+class laddu extends StatefulWidget {
+  const laddu({super.key});
 
   @override
-  State<dosha> createState() => _doshaState();
+  State<laddu> createState() => _ladduState();
 }
 
-class _doshaState extends State<dosha> {
+class _ladduState extends State<laddu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: AppBar(
@@ -60,7 +60,7 @@ class _doshaState extends State<dosha> {
                 alignment: AlignmentGeometry.topCenter,
                 child: Image.asset(
                   fit: BoxFit.fitWidth,
-                  'assets/images/dosha.png',
+                  'assets/images/laddu .png',
                   width: 350.w,
                   height: 300.h,
                 ),
@@ -78,7 +78,7 @@ class _doshaState extends State<dosha> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Dosha",
+                            "Laddu",
                             style: GoogleFonts.urbanist(
                               fontSize: 26.sp,
                               fontWeight: FontWeight.bold,
@@ -86,7 +86,7 @@ class _doshaState extends State<dosha> {
                             ),
                           ),
                           Text(
-                            "Rs 70",
+                            "Rs 130",
                             style: GoogleFonts.urbanist(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

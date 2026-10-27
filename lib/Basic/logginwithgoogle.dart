@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:mynewapp/food_delivery_app/creatnewaccound.dart';
+import 'package:mynewapp/creatnewaccound.dart';
 
 class singin extends StatefulWidget {
   const singin({super.key});
